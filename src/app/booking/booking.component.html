@@ -1,0 +1,149 @@
+<p>booking works!</p>
+{{ bookingForm.value | json }}
+{{ bookingForm.pristine | json }}
+{{ bookingForm.dirty | json }}
+
+<form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
+  <mat-form-field class="example-full-width">
+    <mat-label>RoomId</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="roomId"
+      placeholder="Enter roomid here"
+    />
+
+    <!--  @if (emailFormControl.hasError('email') &&
+    !emailFormControl.hasError('required')) {
+    <mat-error>Please enter a valid email address</mat-error>
+    } @if (emailFormControl.hasError('required')) {
+    <mat-error>Email is <strong>required</strong></mat-error>
+    } -->
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>guestEmail</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="guestEmail"
+      placeholder="Enter guestEmail here"
+    />
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>guestName</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="guestName"
+      placeholder="Enter guestName here"
+    />
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Amount</mat-label>
+    <input
+      type="number"
+      matInput
+      formControlName="bookingAmount"
+      placeholder="Enter Amount here"
+    />
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Choose a checkin date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="checkinDate" />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Choose a checkout date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="checkoutDate" />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <div formGroupName="address">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Address </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>AddressLine1</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="addressLine1"
+        placeholder="Enter addressLine1 here"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>AddressLine2</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="addressLine2"
+          placeholder="Enter addressLine2 here"
+        />
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>city</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="City"
+          placeholder="Enter city here"
+        />
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>state</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="State"
+          placeholder="Enter state here"
+        />
+    </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Country</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="Country"
+              placeholder="Enter Country here"
+            />
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>ZipCode</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="ZipCode"
+          placeholder="Enter ZipCode here"
+        />
+    </mat-form-field>
+  </mat-expansion-panel>
+</div>
+<div>
+    <button mat-raised-button color="primary" type="button" (click)="addGuest()">Add guests</button> 
+</div>
+<div formArrayName="guests">
+@for (guest of guests.controls;track $index;) {
+<div [formGroupName]="$index">
+    <mat-form-field>
+    <input  type="text" matInput [formControlName]="$index" placeHolder="Guest Name"/> 
+</mat-form-field>
+<mat-form-field>
+    <input  type="number" matInput [formControlName]="$index" placeHolder="Guest Age"/> 
+</mat-form-field>
+</div>
+}
+</div>
+  <div>
+    <button mat-raised-button color="primary">Book</button>
+  </div>
+</form>
